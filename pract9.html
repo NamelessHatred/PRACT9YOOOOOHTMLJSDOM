@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Управление информацией об автомобилях</title>
+</head>
+<body>
+<h1>Управление информацией об автомобилях</h1>
+
+<div>
+    <input type="text" id="brand" placeholder="Марка">
+    <input type="text" id="model" placeholder="Модель">
+    <input type="number" id="year" placeholder="Год">
+    <input type="text" id="color" placeholder="Цвет">
+    <input type="number" id="price" placeholder="Цена">
+    <button onclick="addCar()">Добавить автомобиль</button>
+</div>
+
+<div id="carList"></div>
+
+<script>
+function addCar() {
+    let brand = document.getElementById("brand").value;
+    let model = document.getElementById("model").value;
+    let year = document.getElementById("year").value;
+    let color = document.getElementById("color").value;
+    let price = document.getElementById("price").value;
+
+    let carCard = document.createElement("div");
+    carCard.innerHTML = `
+        <h3>${brand} ${model}</h3>
+        <p>Год: ${year}, Цвет: ${color}, Цена: ${price}$</p>
+        <button onclick="editCar(this)">Редактировать</button>
+        <button onclick="deleteCar(this)">Удалить</button>
+    `;
+
+    document.getElementById("carList").appendChild(carCard);
+}
+
+function editCar(element) {
+    const carCard = element.parentNode;
+    let newBrand = prompt("Введите новую марку:");
+    let newModel = prompt("Введите новую модель:");
+    let newYear = prompt("Введите новый год:");
+    let newColor = prompt("Введите новый цвет:");
+    let newPrice = prompt("Введите новую цену:");
+
+    carCard.querySelector("h3").innerText = `${newBrand} ${newModel}`;
+    carCard.querySelector("p").innerText = `Год: ${newYear}, Цвет: ${newColor}, Цена: ${newPrice}$`;
+}
+
+function deleteCar(element) {
+    const carCard = element.parentNode;
+    carCard.remove();
+}
+</script>
+</body>
+</html>
